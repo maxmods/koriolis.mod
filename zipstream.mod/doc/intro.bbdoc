@@ -1,0 +1,13 @@
+This module adds two new stream protocols for zip support in streams : "zip" and "zip?"<br/>
+"zip" is for reading files that are in the specified zip.<br/>
+"zip?" is for reading files that are in the specified zip OR (if not found in the zip) on the hard drive (or any other location supported by streams).<br/>
+<br/>
+The zip stream works over another stream. This means that you can not only access zip files on the hard drive, but also zp files that are incbined, 
+or even zip files within other zip files, and so on.<br/>
+<br/>
+Example of valid urls: "zip::myGame/myZip.zip//someFile.txt", or even "zip::incbin::myGame/myZip.zip//someFile.txt" if the zip file is incbined.<br/>
+<br/>
+So you could do by example:  LoadText("zip::myGame/myZip.zip//someFile.txt")<br/>
+<br/>
+In the previous version of this module, TZipStream was not seekable. It is now entirely seekable, and will thus work with any underlying stream.
+<br/>

@@ -1,0 +1,4 @@
+This module gives access to a stream wrapper that buffers the data read by the underlying buffer.<br/>
+When reading from a particular stream involves costly operations, wrapping it with a TBufferedStream can amortize the cost of reading.
+TBufferedStream is used in particular in conjunction with TZipStream, to amortize the high cost of TZipStream.Seek().<br/>
+A buffered stream can also be specified via the stream protocol "buf". By example, OpenSteram("buf::myFile.txt").
