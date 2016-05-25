@@ -7,10 +7,14 @@ Module koriolis.zipstream
 
 Import koriolis.bufferedstream
 
-ModuleInfo "Version: 1.04"
+ModuleInfo "Version: 1.05"
 ModuleInfo "Author: Régis JEAN-GILLES (Koriolis), Bruce A Henderson"
 ModuleInfo "License: Public Domain"
 ModuleInfo "Credit: This mod makes use if the ZLib C functions by Gilles Vollant (http://www.winimage.com/zLibDll/unzip.html), with tidbits from the ZipEngine module by gman)"
+
+ModuleInfo "History: 1.05"
+ModuleInfo "History: NG overload support."
+ModuleInfo "History: unzCloseCurrentFile() and unzClose() return Int."
 ModuleInfo "History: 1.04"
 ModuleInfo "History: Updated for bmx-ng. Now 64-bit compatible."
 ModuleInfo "History: 1.0.3 Fixed crash when attempting to close an already closed ZipStream. Corrected misspell in SetZipStreamPassword and ClearZipStreamPassword (but also kept misspelled version for backward compatibility)."
@@ -76,12 +80,12 @@ Function unzGetCurrentFileSize:Int( file:Byte Ptr )
 Rem
 Close unzip zip file
 End Rem
-Function unzClose( file:Byte Ptr )
+Function unzClose:Int( file:Byte Ptr )
 
 Rem
 Close current file
 End Rem
-Function unzCloseCurrentFile( file:Byte Ptr )
+Function unzCloseCurrentFile:Int( file:Byte Ptr )
 
 Rem
 Opens the currently focused file
@@ -295,7 +299,7 @@ Type TZipStream Extends TStream
 				OpenCurrentFile_()				' Reopen it
 				pos_ = 0
 			EndIf
-			DiscardBytes_(newPos - pos_)
+			DiscardBytes_(Int(newPos - pos_))
 		EndIf
 		Assert Pos() = newPos Else "TZipStream.Seek : Pos() should be " + newPos + " but is " + Pos()
 		Return Pos()
@@ -324,7 +328,7 @@ Type TZipStream Extends TStream
 		'DebugLog "Read"
 		'DebugStop
 		Assert unzfile Else "Attempt to read from closed stream"
-		Local ret% = unzReadCurrentFile(unzfile , buf, count)
+		Local ret% = unzReadCurrentFile(unzfile , buf, Int(count))
 		'DebugLog "Read(post) " + ret
 		CheckZlibError(ret)
 		pos_ :+ ret
