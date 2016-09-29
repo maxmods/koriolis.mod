@@ -232,23 +232,23 @@ Type TZipStream Extends TStream
 	
 ?bmxng
 	Function seek_file_func:Long(bmxStream:TStream, stream:Byte Ptr, offset:Long, origin:Int)
+		Return bmxStream.Seek(offset, origin)
+	End Function
 ?Not bmxng
 	Function seek_file_func:Int(bmxStream:TStream, stream:Byte Ptr, offset:Int, origin:Int)
-?
-		'DebugLog "seek_file_func"
-		'Print Int(Byte Ptr(bmxStream))'!!!
 		Select origin
 			Case ZLIB_FILEFUNC_SEEK_SET
 				Return bmxStream.Seek(offset)
 			Case ZLIB_FILEFUNC_SEEK_CUR
 				Return bmxStream.Seek(bmxStream.Pos()+offset)
 			Case ZLIB_FILEFUNC_SEEK_END
-				Return bmxStream.Seek(offset, origin)'bmxStream.Size()-offset)
+				Return bmxStream.Seek(bmxStream.Size()-offset)
 			Default
 				RuntimeError("Invalid seek origin")
 		End Select
 		Return 0
 	End Function
+?
 	
 	Function close_file_func:Int(bmxStream:TStream, stream:Byte Ptr)
 		'DebugLog "close_file_func"
