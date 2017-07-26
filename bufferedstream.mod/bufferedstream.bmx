@@ -78,13 +78,21 @@ Method Pos()
 			Assert(pos_ >= start_ And pos_ <= end_)
 			If count <= end_-pos_ Then
 				' All data already in the buffer, copy it and return
+?bmxng
+				MemCopy(dst, bufPtr+(pos_-start_), Size_T(count))
+?Not bmxng
 				MemCopy(dst, bufPtr+(pos_-start_), count)
+?
 				pos_ :+ count
 			
 				Return pos_ - initialPos
 			Else
 				If end_-pos_ > 0 Then
+?bmxng
+					MemCopy(dst, bufPtr+(pos_-start_), Size_T(end_-pos_))
+?Not bmxng
 					MemCopy(dst, bufPtr+(pos_-start_), end_-pos_)
+?
 					count :- end_-pos_
 					dst :+ end_-pos_
 					pos_ = end_
@@ -111,7 +119,11 @@ Method Pos()
 					end_ = pos_ + readBytes
 					' Copy data to target buffer
 					Local cnt% = Min(count, readBytes)
+?bmxng
+					MemCopy(dst, bufPtr, Size_T(cnt))
+?Not bmxng
 					MemCopy(dst, bufPtr, cnt)
+?
 					pos_ :+ cnt
 					count :- cnt
 					dst :+ cnt

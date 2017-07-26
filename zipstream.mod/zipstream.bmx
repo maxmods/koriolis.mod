@@ -197,14 +197,14 @@ Type TZipStream Extends TStream
 		EndIf
 	End Method
 	
-	Function open_file_func:Byte Ptr(bmxStream:TStream, filename:Byte Ptr, Mode:Int)
+	Function open_file_func:Byte Ptr(bmxStream:TStream, filename:Byte Ptr, Mode:Int) { nomangle }
 		' Do nothing, stream already open
 		'DebugLog "open_file_func" + Int(Byte Ptr(bmxStream))
 		Return Byte Ptr(bmxStream) ' return dummy address
 	End Function
 	
 ?bmxng
-	Function read_file_func:Long(bmxStream:TStream, stream:Byte Ptr, buf:Byte Ptr, size:Long)
+	Function read_file_func:Long(bmxStream:TStream, stream:Byte Ptr, buf:Byte Ptr, size:Long) { nomangle }
 ?Not bmxng
 	Function read_file_func:Int(bmxStream:TStream, stream:Byte Ptr, buf:Byte Ptr, size:Int)
 ?
@@ -213,7 +213,7 @@ Type TZipStream Extends TStream
 	End Function
 	
 ?bmxng
-	Function write_file_func:Long(bmxStream:TStream, stream:Byte Ptr, buf:Byte Ptr, size:Long)
+	Function write_file_func:Long(bmxStream:TStream, stream:Byte Ptr, buf:Byte Ptr, size:Long) { nomangle }
 ?Not bmxng
 	Function write_file_func:Int(bmxStream:TStream, stream:Byte Ptr, buf:Byte Ptr, size:Int)
 ?
@@ -222,7 +222,7 @@ Type TZipStream Extends TStream
 	End Function
 	
 ?bmxng
-	Function tell_file_func:Long(bmxStream:TStream, stream:Byte Ptr)
+	Function tell_file_func:Long(bmxStream:TStream, stream:Byte Ptr) { nomangle }
 ?Not bmxng
 	Function tell_file_func:Int(bmxStream:TStream, stream:Byte Ptr)
 ?
@@ -231,7 +231,7 @@ Type TZipStream Extends TStream
 	End Function
 	
 ?bmxng
-	Function seek_file_func:Long(bmxStream:TStream, stream:Byte Ptr, offset:Long, origin:Int)
+	Function seek_file_func:Long(bmxStream:TStream, stream:Byte Ptr, offset:Long, origin:Int) { nomangle }
 		Return bmxStream.Seek(offset, origin)
 	End Function
 ?Not bmxng
@@ -249,14 +249,14 @@ Type TZipStream Extends TStream
 		Return 0
 	End Function
 ?
-	
-	Function close_file_func:Int(bmxStream:TStream, stream:Byte Ptr)
+
+	Function close_file_func:Int(bmxStream:TStream, stream:Byte Ptr) { nomangle }
 		'DebugLog "close_file_func"
 		bmxStream.Close()
 		Return 0
 	End Function
 	
-	Function testerror_file_func:Int(bmxStream:TStream, stream:Byte Ptr)
+	Function testerror_file_func:Int(bmxStream:TStream, stream:Byte Ptr) { nomangle }
 		'DebugLog "testerror_file_func"
 		'Return bmxStream.Eof() ' !!! ?
 		Return 0
