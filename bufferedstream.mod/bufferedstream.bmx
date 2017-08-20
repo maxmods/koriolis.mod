@@ -1,4 +1,4 @@
-Strict
+SuperStrict
 
 Rem
 bbdoc: 	Buffered Stream
@@ -143,11 +143,11 @@ Method Pos()
 	End Method
 
 	Method Flush()
-		Return innerStream.Flush()
+		innerStream.Flush()
 	End Method
 
 	Method Close()
-		Return innerStream.Close()
+		innerStream.Close()
 	End Method
 End Type
 
@@ -190,7 +190,7 @@ Function CreateBufferedStreamImpl:TBufferedStream(innerStream:TStream, bufSize%=
 End Function
 
 Type TBufferedStreamFactory Extends TStreamFactory
-	Method CreateStream:TStream ( url:Object,proto$,path$,readable,writeable )
+	Method CreateStream:TStream ( url:Object,proto$,path$,readable:Int,writeable:Int )
 		If proto="buf" And writeable = False
 			Local innerStream:TStream = ReadStream(path)
 			If innerStream <> Null Then

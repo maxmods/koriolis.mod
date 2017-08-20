@@ -1,4 +1,4 @@
-Strict
+SuperStrict
 
 Rem
 bbdoc: 	Zip stream support (read-only)
@@ -40,15 +40,15 @@ Rem
 Return codes for the compression/decompression functions. Negative
 values are errors, positive values are used for special but normal events.
 EndRem
-Const Z_OK            = 0
-Const Z_STREAM_END    = 1
-Const Z_NEED_DICT     = 2
-Const Z_ERRNO        = -1
-Const Z_STREAM_ERROR = -2
-Const Z_DATA_ERROR   = -3
-Const Z_MEM_ERROR    = -4
-Const Z_BUF_ERROR    = -5
-Const Z_VERSION_ERROR = -6
+Const Z_OK:Int            = 0
+Const Z_STREAM_END:Int    = 1
+Const Z_NEED_DICT:Int     = 2
+Const Z_ERRNO:Int        = -1
+Const Z_STREAM_ERROR:Int = -2
+Const Z_DATA_ERROR:Int   = -3
+Const Z_MEM_ERROR:Int    = -4
+Const Z_BUF_ERROR:Int    = -5
+Const Z_VERSION_ERROR:Int = -6
 
 Extern
 
@@ -382,7 +382,7 @@ End Type
 
 
 Type TZipStreamFactory Extends TStreamFactory
-	Method CreateStream:TStream ( url:Object,proto$,path$,readable,writeable )
+	Method CreateStream:TStream ( url:Object,proto$,path$,readable:Int,writeable:Int )
 		'DebugStop
 
 		If (proto="zip" Or proto="zip?") And writeable = False
