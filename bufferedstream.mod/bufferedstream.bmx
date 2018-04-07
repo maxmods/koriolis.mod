@@ -5,10 +5,12 @@ bbdoc: 	Buffered Stream
 End Rem
 Module koriolis.bufferedstream
 
-ModuleInfo "Version: 1.01"
+ModuleInfo "Version: 1.02"
 ModuleInfo "Author: Regis JEAN-GILLES (Koriolis)"
 ModuleInfo "License: Public Domain"
 
+ModuleInfo "History: 1.02"
+ModuleInfo "History: Fixed legacy build."
 ModuleInfo "History: 1.01"
 ModuleInfo "History: Updated for bmx-ng."
 
@@ -32,7 +34,7 @@ Type TBufferedStream Extends TStream
 ?bmxng
 Method Pos:Long()
 ?Not bmxng
-Method Pos()
+Method Pos:Int()
 ?
 		Return pos_
 	End Method
@@ -40,7 +42,7 @@ Method Pos()
 ?bmxng
 	Method Size:Long()
 ?Not bmxng
-	Method Size()
+	Method Size:Int()
 ?
 		Return innerStream.Size()
 	End Method
@@ -48,7 +50,7 @@ Method Pos()
 ?bmxng
 	Method Seek:Long( pos:Long, whence:Int = SEEK_SET_ )
 ?Not bmxng
-	Method Seek( pos )
+	Method Seek:Int( pos:Int )
 ?
 		pos_ = pos
 		If pos_ < start_ Then
@@ -66,7 +68,7 @@ Method Pos()
 ?bmxng
 	Method Read:Long( dst:Byte Ptr,count:Long )
 ?Not bmxng
-	Method Read( dst:Byte Ptr, count )
+	Method Read:Int( dst:Byte Ptr, count:Int )
 ?
 		' NOTE: no doubt it could be optimized further, but hey, if it works
 
@@ -136,7 +138,7 @@ Method Pos()
 ?bmxng
 	Method Write:Long( buf:Byte Ptr,count:Long )
 ?Not bmxng
-	Method Write( buf:Byte Ptr, count )
+	Method Write:Int( buf:Byte Ptr, count:Int)
 ?
 		RuntimeError "Stream is not writeable"
 		Return 0	

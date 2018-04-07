@@ -265,7 +265,7 @@ Type TZipStream Extends TStream
 ?bmxng
 	Method Pos:Long()
 ?Not bmxng
-	Method Pos()
+	Method Pos:Int()
 ?
 		'DebugLog "Pos " + unztell(unzfile)
 		'Return unztell(unzfile)
@@ -275,7 +275,7 @@ Type TZipStream Extends TStream
 ?bmxng
 	Method Size:Long()
 ?Not bmxng
-	Method Size()
+	Method Size:Int()
 ?
 		'DebugLog "Size " + size_
 		Return size_
@@ -284,7 +284,7 @@ Type TZipStream Extends TStream
 ?bmxng
 	Method Seek:Long( newPos:Long, whence:Int = SEEK_SET_ )
 ?Not bmxng
-	Method Seek( newPos )
+	Method Seek:Int( newPos:Int )
 ?
 		If newPos <> pos_ Then							
 			' WARN: this implementation of Seek is extremely inefficient 
@@ -323,7 +323,7 @@ Type TZipStream Extends TStream
 ?bmxng
 	Method Read:Long( buf:Byte Ptr,count:Long )
 ?Not bmxng
-	Method Read( buf:Byte Ptr, count )
+	Method Read:Int( buf:Byte Ptr, count:Int )
 ?
 		'DebugLog "Read"
 		'DebugStop
@@ -338,7 +338,7 @@ Type TZipStream Extends TStream
 ?bmxng
 	Method Write:Long( buf:Byte Ptr,count:Long )
 ?Not bmxng
-	Method Write( buf:Byte Ptr, count )
+	Method Write:Int( buf:Byte Ptr, count:Int )
 ?
 		'DebugLog "Write"
 		RuntimeError "Stream is not writeable"
